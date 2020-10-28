@@ -1,7 +1,7 @@
 <template>
 	<!-- 列表组件封装 -->
 	<!-- <view class="flex flex-wrap"> -->
-		<view class="list-item">
+		<view class="list-item" @click="into">
 			<image :src="item.image" style="width: 365rpx; height: 365rpx;" class="rounded" mode="aspectFill">
 			</image>
 			
@@ -30,6 +30,13 @@
 		props:{
 			item: Object,
 			index: [Number,String]
+		},
+		methods:{
+			into() {
+				this.$emit('into', {
+					index: this.index,
+				});
+			}
 		}
 	}
 </script>

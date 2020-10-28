@@ -1,15 +1,15 @@
 <template>
 	<view class="content">
 		<!-- 自定义导航栏 -->
-		<nav-bar>
+<!-- 		<nav-bar>
 				<template slot="left">
 					<text class="font-md ml-2 text-white">直播</text>
 				</template>
 				<template slot="right">
 					<text class="iconfont iconmore mr-2 text-white"></text>
 				</template>
-		</nav-bar>
-		<view style="margin-top: 24px;">
+		</nav-bar> -->
+		<!-- <view style="margin-top: 24px;"> -->
 			<!-- 轮播图 -->
 			<swiper :indicator-dots="true" :autoplay="true" :interval="3000" :duration="200" style="width: 750rpx;height: 250rpx;">
 				<swiper-item>
@@ -19,9 +19,9 @@
 					<image src="../../static/beijing1.jpg" style="width: 750rpx;height: 250rpx;"></image>
 				</swiper-item>
 			</swiper>
-		</view>
+		<!-- </view> -->
 		<view class="flex flex-wrap">
-			<l-list v-for="(item,index) in list" :key="index" :item="item" :index="index"></l-list>
+			<l-list v-for="(item,index) in list" :key="index" :item="item" :index="index" @into="live"></l-list>
 		</view>
 			
 	</view>
@@ -35,8 +35,8 @@ import lList from '../../components/common/l-list.vue'
 			navBar,lList
 		},
 		data() {
-			
 			return{
+				
 				list:[
 				{
 					rank: 4,
@@ -85,6 +85,15 @@ import lList from '../../components/common/l-list.vue'
 		},
 		onLoad() {
 			// uni.hideTabBar();
+		},
+		methods:{
+			live(value) {
+				// console.log(value);
+				uni.navigateTo({
+					url: '/pages/live/live'
+				})
+				
+			}
 		}
 	}
 </script>

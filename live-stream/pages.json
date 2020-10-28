@@ -3,6 +3,9 @@
 		{
 			"path": "pages/index/index",
 			"style": {
+				"app-plus": {
+					"titleNView": false
+				}
 			}
 		}
 	    ,{
@@ -18,17 +21,20 @@
             "path" : "pages/live/live",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
+				"navigationBarTextStyle":"white",
+				"backgroundColor":"#000000",
+				"app-plus": {
+					"titleNView": false
+				}
             }
             
         }
     ],
 	"globalStyle": {
-		"navigationBarTextStyle": "white",
+		// "navigationBarTextStyle": "white",
 		// "navigationBarTitleText": "直播",
-		"navigationBarBackgroundColor": "#8745FF",
-		"backgroundColor": "#8745FF"
+		// "navigationBarBackgroundColor": "#8745FF",
+		// "backgroundColor": "#8745FF"
 	},
 	"tabBar":{
 		"color":"#707070",
