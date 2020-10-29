@@ -16,17 +16,14 @@
             "autoclose" : true,
             "delay" : 0
         },
-		// 顶部状态栏
-		// "statusbar": {
-		// "background":"#CCCCCC", // 安全区域外的背景颜色，默认值为"#FFFFFF"
-		// "bottom":{ 
-		// "offset":"none" // 底部安全区域偏移，"none"表示不空出安全区域，"auto"自动计算空出安全区域，默认值为"none"
-		// },
-		// "immersed": "none|suggestedDevice|supportedDevice，沉浸式状态栏情况",
-		// "style": "dark|light "
-		// },
         /* 模块配置 */
         "modules" : {},
+		// 顶部状态栏
+		"statusbar": {
+		"background":"#000000", // 安全区域外的背景颜色，默认值为"#FFFFFF"
+		"immersed": "none|suggestedDevice|supportedDevice，沉浸式状态栏情况",
+		"style": "dark|light "
+		},
         /* 应用发布信息 */
         "distribute" : {
             /* android打包配置 */

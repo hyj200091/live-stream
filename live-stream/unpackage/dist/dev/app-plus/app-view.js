@@ -1369,32 +1369,59 @@ var render = function() {
         ],
         1
       ),
-      _c(
-        "v-uni-view",
-        {
-          staticClass: _vm._$g(10, "sc"),
-          staticStyle: {
-            position: "absolute",
-            right: "15rpx",
-            bottom: "15rpx",
-            "background-color": "rgba(0,0,0,0.4)"
-          },
-          attrs: { _i: 10 }
-        },
-        [
-          _c("v-uni-text", {
-            staticClass: _vm._$g(11, "sc"),
-            staticStyle: { width: "20rpx", height: "20rpx" },
-            attrs: { _i: 11 }
-          }),
-          _c(
-            "v-uni-text",
-            { staticClass: _vm._$g(12, "sc"), attrs: { _i: 12 } },
-            [_vm._v("已结束")]
+      _vm._$g(10, "i")
+        ? _c(
+            "v-uni-view",
+            {
+              staticClass: _vm._$g(10, "sc"),
+              staticStyle: {
+                position: "absolute",
+                right: "15rpx",
+                bottom: "15rpx",
+                "background-color": "rgba(0,0,0,0.4)"
+              },
+              attrs: { _i: 10 }
+            },
+            [
+              _c("v-uni-text", {
+                staticClass: _vm._$g(11, "sc"),
+                staticStyle: { width: "20rpx", height: "20rpx" },
+                attrs: { _i: 11 }
+              }),
+              _c(
+                "v-uni-text",
+                { staticClass: _vm._$g(12, "sc"), attrs: { _i: 12 } },
+                [_vm._v("已结束")]
+              )
+            ],
+            1
           )
-        ],
-        1
-      )
+        : _c(
+            "v-uni-view",
+            {
+              staticClass: _vm._$g(13, "sc"),
+              staticStyle: {
+                position: "absolute",
+                right: "15rpx",
+                bottom: "15rpx",
+                "background-color": "rgba(0,0,0,0.4)"
+              },
+              attrs: { _i: 13 }
+            },
+            [
+              _c("v-uni-text", {
+                staticClass: _vm._$g(14, "sc"),
+                staticStyle: { width: "20rpx", height: "20rpx" },
+                attrs: { _i: 14 }
+              }),
+              _c(
+                "v-uni-text",
+                { staticClass: _vm._$g(15, "sc"), attrs: { _i: 15 } },
+                [_vm._v("进行中")]
+              )
+            ],
+            1
+          )
     ],
     1
   )
