@@ -51,15 +51,11 @@
 			   
 			   
 			   <!-- 收到礼物 -->
-			   <view style="height: 300rpx;">
 				 <f-gift ref="gift"></f-gift>
-			   </view>
 		   </view>
 		   
-		   <!-- 弹幕 -->
-		   <view class="bg-main" style="position: fixed;bottom: 120rpx;left: 0;right: 0;width: 750rpx;height: 300rpx;">
-		   	<text>弹幕区</text>
-		   </view>
+		   <!-- 弹幕区-->
+		<f-danmu></f-danmu>
 		   
 <!-- 底部 -->
   <view style="height: 120rpx;" class="flex align-center justify-between fixed-bottom">
@@ -88,9 +84,10 @@
 
 <script>
 	import fGift from '@/components/live/f-gift.vue';
+	import fDanmu from '@/components/live/f-danmu.vue';
 	export default {
 		components:{
-			fGift
+			fGift,fDanmu
 		},
 		mounted() {
 			//送礼物演示
