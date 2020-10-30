@@ -20,7 +20,7 @@
         "modules" : {},
 		// 顶部状态栏
 		"statusbar": {
-		"background":"#000000", // 安全区域外的背景颜色，默认值为"#FFFFFF"
+		"background":"#8745FF", // 安全区域外的背景颜色，默认值为"#FFFFFF"
 		"immersed": "none|suggestedDevice|supportedDevice，沉浸式状态栏情况",
 		"style": "dark|light "
 		},

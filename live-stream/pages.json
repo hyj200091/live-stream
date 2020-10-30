@@ -13,7 +13,11 @@
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
+                "enablePullDownRefresh": false,
+				// 配置是否显示状态栏留高度
+				"app-plus": {
+					"titleNView": false
+				}
             }
             
         }
@@ -64,7 +68,7 @@
 		},
 		{
 			"iconPath":"static/tabbar/my.png",
-			"selectedIconPath":"static/tabbar/my-selected.png",
+			"selectedIconPath":"./static/tabbar/my-selected.png",
 			"pagePath":"pages/my/my",
 			"text":"我的"
 		}]
