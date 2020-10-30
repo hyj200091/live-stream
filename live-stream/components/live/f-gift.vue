@@ -42,7 +42,10 @@
 				this.$nextTick(()=> {
 					let index = this.gifts.length - 1
 					let ref = 'item' + index
+					// console.log(JSON.stringify(this.$refs[ref]).length);
 					if (this.$refs[ref]) {
+						// console.log(JSON.stringify(this.$refs[ref][0]));
+						// 置于最前面滚动条 然后下一条就展示出来
 						dom.scrollToElement(this.$refs[ref][0],{})
 					}
 				})
