@@ -45,11 +45,11 @@
 					<text class="iconfont text-white mb-1">&#xe60c;</text>
 					<text class="text-white font">画质</text>
 				</view>
-				<view style="height: 120rpx; width: 100rpx;" class="flex flex-column align-center justify-center">
+				<view style="height: 120rpx; width: 100rpx;" class="flex flex-column align-center justify-center" @click="openPopup('beauty')">
 					<text class="iconfont text-white mb-1">&#xe632;</text>
 					<text class="text-white font">美颜</text>
 				</view>
-				<view style="height: 120rpx; width: 100rpx;" class="flex flex-column align-center justify-center">
+				<view style="height: 120rpx; width: 100rpx;" class="flex flex-column align-center justify-center" @click="openPopup('whiteness')">
 					<text class="iconfont text-white mb-1">&#xe631;</text>
 					<text class="text-white font">美白</text>
 				</view>
@@ -71,6 +71,14 @@
 				@click="chooseMode(item)">
 				<text class="font-md" :class="mode === item.type? 'bg-white' : ''">{{item.desc}}</text>
 				</view>
+			</view>
+			<!-- 美颜 -->
+			<view v-else-if="popupType === 'beauty'">
+				<slider :min="0" :max="9" :step="1" :value="beauty" :block-size="18" show-value @change="handleSliderChange" />
+			</view>
+			<!-- 美白 -->
+			<view v-else>
+				<slider  :min="0" :max="9" :step="1" :value="whiteness" :block-size="18" show-value @change="handleSliderChange" />
 			</view>
 			<view class="f-divider"></view>
 			<view class="flex align-center justify-center"
@@ -125,7 +133,20 @@
 		 this.context = uni.createLivePusherContext('livePusher', this)
 		 this.startPreview()
 		},
+		computed:{
+			popupTitle() {
+				let o = {
+					mode: '画质',
+					beauty: '美颜',
+					whiteness: '美白'
+				}
+				return o[this.popupType]
+			}
+		},
 		methods:{
+			handleSliderChange(e) {
+				this[this.popupType] = e.detail.value
+			},
 			// 画质选择
 			chooseMode(item) {
 				this.mode = item.type
