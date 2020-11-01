@@ -56,7 +56,7 @@
 			</view>
 		</view>
 		<view class="position-fixed bg-main flex align-center justify-center rounded-circle"
-		style="left: 100rpx;right: 100rpx; bottom: 100rpx;height: 120rpx;">
+		style="left: 100rpx;right: 100rpx; bottom: 100rpx;height: 120rpx;" @click="openLiveRoom(e)">
 		<text class="text-white font-md">开始视频直播</text>
 		</view>
 		<uni-popup type="bottom" ref="popup">
@@ -144,6 +144,17 @@
 			}
 		},
 		methods:{
+			openLiveRoom(e) {
+				console.log(111);
+				uni.navigateTo({
+					url:'/pages/live-room/live-room?options=' +JSON.stringify({
+						mode: this.mode,
+						position: this.position,
+						beauty: this.beauty,
+						whiteness: this.whiteness
+					}),
+				});
+			},
 			handleSliderChange(e) {
 				this[this.popupType] = e.detail.value
 			},
@@ -160,8 +171,8 @@
 				this.popupType = type
 				this.$refs.popup.open()
 			},
-		// 切换摄像头
-		 switchCamera() {
+		  // 切换摄像头
+		  switchCamera() {
 			 this.context.switchCamera({
 				 success: (e) => {
 					 this.position = this.position === 'back' ? 'front' : 'back' 
