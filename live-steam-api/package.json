@@ -7,7 +7,9 @@
     "declarations": true
   },
   "dependencies": {
+    "await-stream-ready": "^1.0.1",
     "crypto": "^1.0.1",
+    "dayjs": "^1.9.4",
     "egg": "^2.15.1",
     "egg-cors": "^2.2.3",
     "egg-jwt": "^3.1.7",
@@ -15,7 +17,10 @@
     "egg-scripts": "^2.11.0",
     "egg-sequelize": "^6.0.0",
     "egg-valparams": "^1.4.3",
-    "mysql2": "^2.2.5"
+    "md5": "2.3.0",
+    "mysql2": "^2.2.5",
+    "node-media-server": "^2.2.4",
+    "stream-wormhole": "^1.1.0"
   },
   "devDependencies": {
     "autod": "^3.0.1",
