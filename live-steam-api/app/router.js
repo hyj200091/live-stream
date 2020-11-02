@@ -18,4 +18,6 @@ module.exports = app => {
   router.post('/api/live/create', controller.api.live.save);
   // 修改直播间状态
   router.post('/api/live/changstatus', controller.api.live.changeStatus);
+  // 直播间列表
+  router.get('/api/live/list/:page', controller.api.live.list);
 };

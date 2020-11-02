@@ -1,3 +1,4 @@
+/* eslint-disable prefer-const */
 /* eslint-disable no-unused-vars */
 'use strict';
 
@@ -94,6 +95,25 @@ class LiveController extends Controller {
     live.status = status[type];
     await live.save();
     ctx.apiSuccess('ok');
+  }
+  // 直播间列表
+  async list() {
+    let { ctx, app } = this;
+    ctx.validate({
+      page: {
+        required: true,
+        desc: '页码',
+        type: 'int',
+      },
+    });
+    let page = ctx.params.page;
+    let limit = 10;
+    let offset = (page - 1) * 10;
+    let rows = await app.model.Live.findAll({
+      limit,
+      offset,
+    });
+    ctx.apiSuccess(rows);
   }
 }
 
