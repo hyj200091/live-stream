@@ -18,27 +18,5 @@ export default new Vuex.Store({
 			uni.setStorageSync('user', JSON.stringify(user))
 			uni.setStorageSync('token', user.token)
 		},
-		// logout({ state }) {
-		// 	$H.post('/logout',{}, {
-		// 		token: true
-		// 	})
-		// 	state.user = null
-		// 	state.token = null
-		// 	uni.removeStorageSync('user')
-		// 	uni.removeStorageSync('token')
-		// 	uni.removeStorageSync('dirs');
-		// 	// 重启应用
-		// 	uni.reLaunch({
-		// 		url: '/pages/login/login'
-		// 	});
-		// },
-		
-		// initUser({ state }){
-		// 	let user = uni.getStorageSync('user')
-		// 	if(user) {
-		// 		state.user = JSON.parse(user)
-		// 		state.token = state.user.token
-		// 	}
-		// }
 	}
 })
