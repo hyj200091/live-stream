@@ -147,7 +147,7 @@
 			openLiveRoom(e) {
 				console.log(111);
 				uni.navigateTo({
-					url:'/pages/live-room/live-room?options=' +JSON.stringify({
+					url:'../live-room/live-room?options=' + JSON.stringify({
 						mode: this.mode,
 						position: this.position,
 						beauty: this.beauty,

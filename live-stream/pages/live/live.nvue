@@ -1,7 +1,7 @@
 <template>
 	<view class="flex-1">
 		<!-- video默认就是在屏幕的中间部分 所以不需要给定位置 -->
-		   <video src="http://ivi.bupt.edu.cn/hls/hunanhd.m3u8" autoplay controls="false" class="flex-1"></video>
+		   <video src="https://houyuejia.utools.club/live/ZmKe7I2iL4kYl3VhZnFZ.flv?sign=1604331202-71109d2ac67c0da1e17eb967d9b3afc6" autoplay controls="false" class="flex-1"></video>
 		   
 		   <!-- 头部 -->
 		   <view style="position: fixed;left: 0;right: 0;" :style="'top:' + statusBarHeight + 'px'">

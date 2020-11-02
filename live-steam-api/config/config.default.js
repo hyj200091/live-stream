@@ -1,7 +1,8 @@
+/* eslint-disable no-unused-vars */
 /* eslint valid-jsdoc: "off" */
 
 'use strict';
-
+const NodeMediaServer = require('node-media-server');
 /**
  * @param {Egg.EggAppInfo} appInfo app info
  */
@@ -108,6 +109,8 @@ module.exports = appInfo => {
       secret: 'nodemedia2017privatekey',
     },
   };
+  const nms = new NodeMediaServer(config.mediaServer);
+  nms.run();
   return {
     ...config,
     ...userConfig,

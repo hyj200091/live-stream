@@ -21,7 +21,7 @@
 			</swiper>
 		<!-- </view> -->
 		<view class="flex flex-wrap">
-			<l-list v-for="(item,index) in list" :key="index" :item="item" :index="index" @into="live"></l-list>
+			<l-list v-for="(item,index) in list" :key="index" :item="item" :index="index" @into="live(item)"></l-list>
 		</view>
 			
 	</view>
@@ -43,7 +43,8 @@ import lList from '../../components/common/l-list.vue'
 					image: 'https://soft1851.oss-cn-beijing.aliyuncs.com/markdown/2033810.jpg',
 					people: 990,
 					title: '二次元',
-					finish:0    //0表示结束 1 表示正在直播
+					finish:0    ,//0表示结束 1 表示正在直播
+					url: 'https://houyuejia.utools.club/live/ZmKe7I2iL4kYl3VhZnFZ.flv?sign=1604331202-71109d2ac67c0da1e17eb967d9b3afc6'
 				},
 				{
 					rank: 1,
