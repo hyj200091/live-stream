@@ -16,4 +16,6 @@ module.exports = app => {
   router.post('/api/logout', controller.api.user.logout);
   // 创建直播间
   router.post('/api/live/create', controller.api.live.save);
+  // 修改直播间状态
+  router.post('/api/live/changstatus', controller.api.live.changeStatus);
 };

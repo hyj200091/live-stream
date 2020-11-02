@@ -20,7 +20,7 @@ module.exports = appInfo => {
   config.middleware = [ 'errorHandler', 'auth' ];
 
   config.auth = {
-    match: [ '/api/live/create', '/api/logout', '/api/user/info' ],
+    match: [ '/api/live/create', '/api/logout', '/api/user/info', '/api/live/changstatus' ],
   };
 
   // add your user config here
