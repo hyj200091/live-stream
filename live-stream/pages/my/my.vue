@@ -75,9 +75,11 @@
 				});
 			},
 			logout() {
-				uni.navigateTo({
-					url: '../login/login'
-				});
+				this.$store.dispatch('logout').then(res => {
+				uni.navigateBack({
+					delta: 1
+				})
+			 });
 			}
 		}
 	}
