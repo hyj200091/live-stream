@@ -146,4 +146,11 @@
 		background-size: cover;
 		/* background-image: linear-gradient(to bottom, #BA7ACE 0%, #8745FF 100%); */
 	}
+	.list-item{
+		width: 375rpx;
+		height: 375rpx;
+		padding-right: 5rpx;
+		box-sizing: border-box;
+		position: relative;
+	}
 </style>
