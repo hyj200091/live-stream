@@ -99,7 +99,7 @@
 				    }, 1000)
 					if(this.second<60){
 						uni.showToast({
-							title: "时间未到 不能重复获取!",
+							title:"时间未到 不能重复获取!",
 							icon:'none'
 						})
 					}

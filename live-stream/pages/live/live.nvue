@@ -203,19 +203,10 @@
 			},
 			// 打开输入弹幕的对话框
 			openInput() { 
-			const user = JSON.parse(uni.getStorageSync('user'))
-			console.log(user);
-				if(uni.getStorage('token') === null) {
-					uni.showToast({
-						title:'请先登录',
-						icon:'none'
-					});
-					console.log('验证token是否为空');
-					uni.navigateTo({
-						url:'/pages/login/login'
-					})
-				}
-				this.$refs.input.open()
+				this.$store.dispatch('authMethod', () => {
+					this.$refs.input.open()
+				})
+				// this.$refs.input.open()
 			},
 			// 提交发送弹幕信息
 			submit(){

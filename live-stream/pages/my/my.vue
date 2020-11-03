@@ -2,6 +2,9 @@
 	<view>
 		<!-- 顶部紫色渐变背景 -->
 		<view class="top flex align-center justify-center"></view>
+		<view style="position: absolute;top: 90rpx;right: 20rpx;" @click="settings">
+			<image src="../../static/setting.png" style="height: 70rpx;width: 70rpx;"></image>
+		</view>
 		<view v-if="!user" class="flex align-center">
 			<view class="flex align-center justify-center position-relative" style="width: 180rpx;height: 160rpx;">
 				<image src="/static/gift/2.png" class="rounded-circle" style="height: 145rpx; width: 145rpx; position: absolute;top: -60rpx;"></image>
@@ -86,6 +89,11 @@
 					delta: 1
 				})
 			 });
+			},
+			settings(){
+				this.authJump({
+					url:'../user-set/user-set'
+				})
 			}
 		}
 	}
