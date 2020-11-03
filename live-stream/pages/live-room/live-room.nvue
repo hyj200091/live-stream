@@ -139,7 +139,7 @@
 			content: '',
 			gifts: [],
 			giftActiveId: 0,
-			url: '', //直播服务器地址，暂空
+			url:'rtmp://39.97.252.60:1935/live/exp', //直播服务器地址，暂空
 			mode: 'SD', //标清模式
 			enableCamera: true, //是否启用摄像头
 			position: 'back', //默认摄像头
@@ -209,7 +209,8 @@
 		},
 		onReady() {
 			this.context = uni.createLivePusherContext('livePusher', this)
-			this.startPreview()
+			// this.startPreview()
+			this.startLive();
 		},
 		computed:{
 			popupTitle() {
@@ -223,6 +224,13 @@
 			}
 		},
 		methods:{
+					startLive() {
+						this.context.start({
+							success: a => {
+								console.log('livePusher.start:' + JSON.stringify(a));
+							}
+						});
+					},
 			handleBottomEvent(item) {
 				this[item.event](item.params)
 			},

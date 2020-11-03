@@ -1,7 +1,7 @@
 <template>
 	<view class="flex-1">
 		<!-- video默认就是在屏幕的中间部分 所以不需要给定位置 -->
-		   <video src="https://houyuejia.utools.club/live/ZmKe7I2iL4kYl3VhZnFZ.flv?sign=1604331202-71109d2ac67c0da1e17eb967d9b3afc6" autoplay controls="false" class="flex-1"></video>
+		   <video src="rtmp://47.115.60.46:1935/live/exp" autoplay controls="false" class="flex-1"></video>
 		   
 		   <!-- 头部 -->
 		   <view style="position: fixed;left: 0;right: 0;" :style="'top:' + statusBarHeight + 'px'">
@@ -61,7 +61,7 @@
 <!-- 底部 -->
   <view style="height: 120rpx;" class="flex align-center justify-between fixed-bottom">
    <view class="px-2">
-    <view class="btn px-3" @tap="openInput">
+    <view class="btn px-3" @click="openInput">
      <text class="text-white font">说点什么...</text>
     </view>
    </view>
@@ -202,7 +202,19 @@
 				})
 			},
 			// 打开输入弹幕的对话框
-			openInput() {
+			openInput() { 
+			const user = JSON.parse(uni.getStorageSync('user'))
+			console.log(user);
+				if(uni.getStorage('token') === null) {
+					uni.showToast({
+						title:'请先登录',
+						icon:'none'
+					});
+					console.log('验证token是否为空');
+					uni.navigateTo({
+						url:'/pages/login/login'
+					})
+				}
 				this.$refs.input.open()
 			},
 			// 提交发送弹幕信息

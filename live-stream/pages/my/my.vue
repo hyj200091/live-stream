@@ -46,6 +46,7 @@
 		</f-list-item>
 		<f-list-item icon="iconmore" title="历史记录" ></f-list-item>
 		<f-list-item icon="icontuichu" title="退出" @click="logout"></f-list-item>
+		<f-list-item icon="icontuichu" title="直播" @click="live"></f-list-item>
 		</view>
 	</view>
 </template>
@@ -69,6 +70,11 @@
 			this.$store.dispatch('getUserInfo');
 		},
 		methods:{
+			live(){
+				uni.navigateTo({
+					url:'../test/test'
+				})
+			},
 			openLogin(){
 				uni.navigateTo({
 					url:'../login/login'

@@ -1804,6 +1804,14 @@ var render = function() {
                     return _vm.$handleViewEvent($event)
                   }
                 }
+              }),
+              _c("f-list-item", {
+                attrs: { _i: 29 },
+                on: {
+                  click: function($event) {
+                    return _vm.$handleViewEvent($event)
+                  }
+                }
               })
             ],
             1
@@ -3210,7 +3218,7 @@ var render = function() {
                   ),
                   _c("v-uni-input", {
                     staticClass: _vm._$g(6, "sc"),
-                    attrs: { type: "text", placeholder: "手机号", _i: 6 }
+                    attrs: { type: "number", placeholder: "手机号", _i: 6 }
                   })
                 ],
                 1
@@ -3333,6 +3341,7 @@ var render = function() {
         "v-uni-view",
         {
           staticClass: _vm._$g(18, "sc"),
+          class: _vm._$g(18, "c"),
           staticStyle: {
             height: "90rpx",
             width: "100%",

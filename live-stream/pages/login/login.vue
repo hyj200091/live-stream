@@ -7,7 +7,7 @@
 		<view v-if=" type == 'codeLogin'" style="height: 215rpx;" class="px-3 bg-white">
 			<view class="flex  align-center border-bottom " style="height: 100rpx;">
 				<text class="font-sm font-weight-bold mr-3">+86</text>
-				<input type="text" placeholder="手机号" class="font-sm">
+				<input type="number" placeholder="手机号" class="font-sm">
 			</view>
 			<view class="flex justify-between align-center mt-1 border-bottom" style="height: 100rpx;">
 				<input type="text" placeholder="请输入验证码" class="font-sm mr-5">
@@ -25,13 +25,13 @@
 			</view>
 			<view class="flex justify-between align-center mt-1 border-bottom" style="height: 100rpx;">
 				<input type="text" placeholder="请输入密码" class="font-sm mr-5" v-model="form.password">
-				<view style="width: 130rpx;height: 55rpx;" class="bg-secondary rounded align-center">
+				<view style="width: 130rpx;height: 55rpx;" class="flex justify-center bg-secondary rounded align-center">
 					<text class="font-sm  text-white">忘记密码</text>
 				</view>
 			</view>
 		</view>
 		
-		<view style="height: 90rpx;width:100%;margin-top: 70rpx;" class="flex rounded-circle bg-danger justify-center align-center" @click="submit">
+		<view :class="form.password === '' ? 'bg-secondary' : 'bg-danger'" style="height: 90rpx;width:100%;margin-top: 70rpx;" class="flex rounded-circle justify-center align-center" @click="submit">
 			<text class="font text-white">登录</text>
 		</view>
 		<!-- 下面部分 -->
@@ -97,6 +97,12 @@
 				    var interval = setInterval(() => {
 				        --this.second
 				    }, 1000)
+					if(this.second<60){
+						uni.showToast({
+							title: "时间未到 不能重复获取!",
+							icon:'none'
+						})
+					}
 				    setTimeout(() => {
 				        clearInterval(interval)
 				        this.codeTime = 0
