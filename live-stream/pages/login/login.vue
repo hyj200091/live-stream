@@ -151,16 +151,17 @@
 				                success: function (loginRes) {
 				        // console.log(JSON.stringify(loginRes));
 					if(loginRes.errMsg === 'login:ok'){
-						that.wxid = loginRes.authResult.openid
+						var wxid = loginRes.authResult.openid
 							// console.log(this.wxid);
 							    // 获取用户信息
 							    uni.getUserInfo({
 							      provider: 'weixin',
 							      success: function (infoRes) {
 							        // console.log('用户昵称为：' + infoRes.userInfo.nickName);
-									that.username = infoRes.userInfo.nickName
+									let username = infoRes.userInfo.nickName
+									let avatar = infoRes.userInfo.avatarUrl
 									// console.log(that.username);
-									let wxlogDto = {"openId":that.wxid,"name":that.username};
+									let wxlogDto = {"openId":wxid,"name":username,"avatarUrl":avatar};
 									// console.log(wxlogDto);
 										that.$H.post('/wxLogin',wxlogDto).then(res => {
 											console.log(res);
@@ -169,7 +170,6 @@
 										    icon: 'none'
 										});
 								that.$store.dispatch('login', res);
-								// console.log("11111111");
 									uni.switchTab({
 										url: '../my/my'
 										});

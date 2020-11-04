@@ -1,7 +1,7 @@
 <template>
 	<view class="flex-1">
 		<!-- video默认就是在屏幕的中间部分 所以不需要给定位置 -->
-		   <video src="rtmp://47.115.60.46:1935/live/exp" autoplay controls="false" class="flex-1"></video>
+		   <video :src="src" autoplay controls="false" class="flex-1"></video>
 		   
 		   <!-- 头部 -->
 		   <view style="position: fixed;left: 0;right: 0;" :style="'top:' + statusBarHeight + 'px'">
@@ -134,6 +134,7 @@
 	import fDanmu from '@/components/live/f-danmu.vue';
 	import uniPopup from '@/components/uni-ui/uni-popup/uni-popup.vue';
 	import myGifts from '@/common/gifts.js'
+	import $H from '@/common/request.js'
 	export default {
 		components:{
 			fGift,fDanmu,uniPopup
@@ -158,9 +159,9 @@
 					id: 1,
 					title: '',
 					cover: '',
-					user_id: '',
-					look_count: '',
-					coin: '',
+					user_id: 0,
+					look_count: 0,
+					coin: 0,
 					key: '',
 					status: 0,
 					userId: 0,
@@ -177,8 +178,8 @@
 				giftActiveId: 0
 			};
 		},
-		onLoad(Option) {
-			this.id = Option.id
+		onLoad(option) {
+			this.id = option.id
 			console.log(this.id);
 			let res = uni.getSystemInfoSync()
 			this.statusBarHeight = res.statusBarHeight
@@ -186,10 +187,20 @@
 			this.gifts = myGifts
 			// 请求后端接口，获取该直播间详情数据，包括主播信息，和直播间的签名等数据
 			$H.get('/live/read/' + this.id).then(res => {
-				console.log(res);
+				// 定义一个和res.data一样结构的返回结果 然后就可以直接赋值
+				// console.log(res);
 				this.detail = res.data
+				// console.log(this.detail);
 				this.sign = res.sign;
 			});
+		},
+		computed:{
+			src() {
+				if(this.detail.key == '' || this.sign == ''){
+					return '';
+				}
+				return `https://mylive.utools.club/live/${this.detail.key}.flv?sign=${this.sign}`;
+			}
 		},
 		methods:{
 			// 打开送礼物框
@@ -214,8 +225,8 @@
 				}
 				let g = this.gifts[index]
 				this.$refs.gift.send({
-					username: 'martin',
-					avatar: '',
+					username: this.$store.state.user.username,
+					avatar: this.$store.state.user.avatar,
 					gift_name: g.name,
 					gift_image: g.image,
 					num: 10
@@ -242,7 +253,7 @@
 				}
 				this.$refs.danmu.send({
 					id: Math.random() * 100, //随机生成一个id
-					name: 'martin',
+					name: this.$store.state.user.username,
 					content:this.content
 				})
 				this.content = ''

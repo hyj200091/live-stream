@@ -110,20 +110,25 @@ class UserController extends Controller {
   async wxLogin() {
     // console.log(1111111);
     const { ctx, app } = this;
-    // 参数验证
-    // ctx.validate({
-    //   wxid: {
-    //     type: 'string',
-    //     required: true,
-    //     desc: '微信唯一标识',
-    //   },
-    //   username: {
-    //     type: 'string',
-    //     required: true,
-    //     desc: '用户昵称',
-    //   },
-    // });
-    let { openId, name } = ctx.request.body;
+    // 是前端传回来的参数进行 参数验证
+    ctx.validate({
+      openId: {
+        type: 'string',
+        required: true,
+        desc: '微信唯一标识',
+      },
+      name: {
+        type: 'string',
+        required: true,
+        desc: '用户昵称',
+      },
+      avatarUrl: {
+        type: 'string',
+        required: true,
+        desc: '用户头像',
+      },
+    });
+    let { openId, name, avatarUrl } = ctx.request.body;
     console.log(ctx.request.body);
 
     let user = await app.model.User.findOne({
@@ -135,6 +140,7 @@ class UserController extends Controller {
       user = await app.model.User.create({
         wxid: openId,
         username: name,
+        avatar: avatarUrl,
       });
     }
     user = JSON.parse(JSON.stringify(user));
