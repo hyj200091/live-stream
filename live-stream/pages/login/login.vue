@@ -1,17 +1,17 @@
 <template>
 	<view class="container">
 		<view class="flex align-center justify-center" style="height: 350rpx;">
-			<text style="font-size: 50rpx;" class="text-secondary">{{ type == 'codeLogin'? '手机验证码登录' : '账号密码登录'}}</text>
+			<text style="font-size: 50rpx;" class="text-secondary">{{ status ? '账号密码登录' : '手机验证码登录' }}</text>
 		</view>
 		<!-- 中间部分 进行判断 -->
-		<view v-if=" type == 'codeLogin'" style="height: 215rpx;" class="px-3 bg-white">
+		<view v-if="!status" style="height: 215rpx;" class="px-3 bg-white">
 			<view class="flex  align-center border-bottom " style="height: 100rpx;">
 				<text class="font-sm font-weight-bold mr-3">+86</text>
-				<input type="number" placeholder="手机号" class="font-sm">
+				<input type="number" placeholder="手机号" class="font-sm" v-model="form.phone">
 			</view>
 			<view class="flex justify-between align-center mt-1 border-bottom" style="height: 100rpx;">
-				<input type="text" placeholder="请输入验证码" class="font-sm mr-5">
-				<view style="width: 130rpx;height: 55rpx;" class="flex justify-center bg-secondary rounded align-center"  @click="getNumber">
+				<input type="text" placeholder="请输入验证码" class="font-sm mr-5" v-model="form.code">
+				<view style="width: 130rpx;height: 55rpx;" class="flex justify-center bg-secondary rounded align-center"  @click="getCode">
 					<text class="font-sm  text-white">{{ codeTime === 0 ? '获取验证码' : second + 's' }}</text>
 				</view>
 				<!-- <view v-else style="width: 130rpx;height: 55rpx;" class="justify-center bg-secondary rounded align-center">
@@ -38,7 +38,7 @@
 		<view class="bg-light" style="height: 380rpx;margin-top: 20rpx;">
 			<!-- 验证码登录 | 登录遇到问题 -->
 			<view style="height: 80rpx;" class="flex align-center justify-center">
-				<text class="font-sm text-hover-primary mr-2" @click="changeType">{{ type == 'codeLogin'? '账号密码登录' : '验证码登录'}}</text>
+				<text class="font-sm text-hover-primary mr-2" @click="changeStatus">{{ status ? '验证码登录' : '账号密码登录' }}</text>
 				<text class="font-sm  mr-2">|</text>
 				<text class="font-sm text-hover-primary">登录遇到了问题</text>
 			</view>
@@ -48,7 +48,7 @@
 			</view>
 			<!-- 图标 -->
 			<view class=" flex justify-center align-center" style="height: 120rpx;">
-				<image class="rounded-circle" src="../../static/wx.png" mode="aspectFill" style="width: 100rpx;height: 100rpx;"></image>
+				<image class="rounded-circle" src="../../static/wx.png" mode="aspectFill" style="width: 100rpx;height: 100rpx;" @click="wxLogin"></image>
 				<image class="rounded-circle mr-5 ml-5" src="../../static/qq.png" mode="aspectFill" style="width: 100rpx;height: 100rpx;"></image>
 				<image class="rounded-circle" src="../../static/wb.png" mode="aspectFill" style="width: 100rpx;height: 100rpx;"></image>
 			</view>
@@ -58,20 +58,6 @@
 			<text class="font-sm text-primary">《xxx社区协议》</text>
 		   </view>
 	</view>
-
-<!-- 		<view class="px-3">
-			<input type="text" v-model="form.username" class="bg-light px-3 mb-4 font rounded" placeholder="请输入用户名" style="height: 100rpx;" />
-			<input type="text" v-model="form.password" class="bg-light px-3 mb-4 font rounded" placeholder="请输入密码" style="height: 100rpx;" />
-			<input v-if="type != 'login'" type="text" v-model="form.repassword" class="bg-light px-3 mb-4 font rounded" placeholder="请输入确认密码" style="height: 100rpx;" />
-		</view>
-		<view class="p-3 flex align-center justify-center" @click="submit">
-			<view class="bg-main rounded p-3 flex align-center justify-center flex-1" hover-class="bg-main-hover">
-				<text class="text-white font-md">{{ type == 'login'? '登录' : '注册'}}</text>
-			</view>
-		</view>
-		<view class="flex align-center justify-center">
-			<text class="text-light-muted font p-2" @click="changeType">{{ type == 'login'? '注册账号' : '去登录'}}</text>
-		</view> -->
 	</view>
 </template>
 
@@ -80,58 +66,122 @@
 		data() {
 			return {
 				 //控制文字和数字的显隐性
+				 wxid: '',
+				 username: '',
 				 codeTime:0,
 				 second: 60,
-				type: 'codeLogin',
+				status: false,
 				form: {
 					username: '',
 					password: '',
-					repassword: ''
+					code: '',
+					phone: ''
 				}
 			}
 		},
 		methods: {
 			// 获取验证码
-			getNumber() {
-				 this.codeTime = 1
-				    var interval = setInterval(() => {
-				        --this.second
-				    }, 1000)
-					if(this.second<60){
-						uni.showToast({
-							title:"时间未到 不能重复获取!",
-							icon:'none'
-						})
-					}
-				    setTimeout(() => {
-				        clearInterval(interval)
-				        this.codeTime = 0
-				    }, 60000)
+			getCode() {
+				this.$H.post('/sendcode', { phone: this.form.phone }).then(res => {
+				 });
+				// 倒计时				 this.codeTime = 1				    var interval = setInterval(() => {				        --this.second				    }, 1000)					if(this.second<60 && this.second > 0){						uni.showToast({							title:"时间未到 不能重复获取!",							icon:'none'						})					}				    setTimeout(() => {				        clearInterval(interval)				        this.codeTime = 0				    }, 60000)
+			   // });
 			},
-			changeType() {
-				this.type = this.type === 'codeLogin' ? 'accountLogin' : 'codeLogin'
+			// 表单验证
+			validate() {
+			//手机号正则
+				var mPattern = /^1[34578]\d{9}$/;
+					if (!mPattern.test(this.phone)) {
+						uni.showToast({
+							title: '手机号格式不正确',
+							icon: 'none'
+						});
+					return false;
+				}
+			// ...更多验证
+			return true;
+			},
+			// 初始化表单
+			initForm() {
+				this.form.username = '';
+				this.form.password = '';
+				this.form.phone = '';
+				this.form.code = '';
+			},
+			changeStatus() {
+			// 初始化表单
+				this.initForm();
+				this.status = !this.status;
 			},
 			submit() {
-				let msg = this.type === 'codeLogin' ? '账号密码登录' : '验证码登录'
-				this.$H.post('/'+ 'login',this.form).then(res => {
-					uni.showToast({
-						title: msg + '成功',
-						icon: 'none'
-					});
-					if(this.type === 'reg'){
-						this.changeType()
-						this.form = {
-							username: '',
-							password: '',
-							repassword: ''
-						}
-					}else {
-						this.$store.dispatch('login',res)
-						uni.navigateBack({
-						delta: 1	
-						});
-					}
-				})
+			// 表单验证
+			// if (!this.validate()) {
+			// 	return;
+			// }
+			let type = '';
+			if (this.status) {
+				type = 'login';
+			} else {
+				type = 'phoneLogin';
+			}
+			// console.log(type);
+			console.log(this.form);
+			this.$H.post('/' + type, this.form).then(res => {
+				console.log(res);
+				uni.showToast({
+					title: '登录成功',
+					icon: 'none'
+				});
+				this.$store.dispatch('login', res);
+				uni.navigateBack({
+					delta: 1
+				});
+			});
+			},
+			wxLogin() {
+				var that = this
+				// app第三方登录
+				uni.getProvider({
+				    service: 'oauth',
+				    success: function (res) {
+				        // console.log(res.provider)
+				        if (~res.provider.indexOf('weixin')) {
+				            uni.login({
+				                provider: 'weixin',
+				                success: function (loginRes) {
+				        // console.log(JSON.stringify(loginRes));
+					if(loginRes.errMsg === 'login:ok'){
+						that.wxid = loginRes.authResult.openid
+							// console.log(this.wxid);
+							    // 获取用户信息
+							    uni.getUserInfo({
+							      provider: 'weixin',
+							      success: function (infoRes) {
+							        // console.log('用户昵称为：' + infoRes.userInfo.nickName);
+									that.username = infoRes.userInfo.nickName
+									// console.log(that.username);
+									let wxlogDto = {"openId":that.wxid,"name":that.username};
+									// console.log(wxlogDto);
+										that.$H.post('/wxLogin',wxlogDto).then(res => {
+											console.log(res);
+											uni.showToast({
+											title: '微信登录成功',
+										    icon: 'none'
+										});
+								that.$store.dispatch('login', res);
+								// console.log("11111111");
+									uni.switchTab({
+										url: '../my/my'
+										});
+									  })
+							        }
+							       });
+								  }
+				                }
+				            });
+				        }
+				    }
+				});
 			}
 		}
 	}

@@ -8,8 +8,14 @@ module.exports = app => {
   router.get('/', controller.home.index);
   // 用户注册
   router.post('/api/reg', controller.api.user.reg);
-  // 用户登录
+  // 账号密码登录
   router.post('/api/login', controller.api.user.login);
+  // 微信登录
+  router.post('/api/wxLogin', controller.api.user.wxLogin);
+  // 发送验证码
+  router.post('/api/sendcode', controller.api.sms.sendCode);
+  // 手机验证码登录
+  router.post('/api/phoneLogin', controller.api.user.phoneLogin);
   // 获取当前用户信息
   router.get('/api/user/info', controller.api.user.info);
   // 用户退出登录

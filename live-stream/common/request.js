@@ -3,7 +3,7 @@ export default {
 	common: {
 		// #ifndef H5
 		// https://houyuejia.utools.club 7001
-		baseUrl: "https://houyuejia.utools.club/api",
+		baseUrl: "https://houyuejia11.utools.club/api",
 		// #endif
 		// #ifdef H5
 		baseUrl: "/api",
@@ -83,6 +83,7 @@ export default {
 					return rej(error)
 				}
 			});
+			
 		})
 	},
 	// get请求
@@ -97,6 +98,7 @@ export default {
 		options.url = url
 		options.data = data
 		options.method = 'POST'
+		// console.log(options.data);
 		return this.request(options)
 	},
 	// delete请求

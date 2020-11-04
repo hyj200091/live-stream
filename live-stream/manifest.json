@@ -17,13 +17,15 @@
             "delay" : 0
         },
         /* 模块配置 */
-        "modules" : {},
-		// 顶部状态栏
-		"statusbar": {
-		"background":"#8745FF", // 安全区域外的背景颜色，默认值为"#FFFFFF"
-		"immersed": "none|suggestedDevice|supportedDevice，沉浸式状态栏情况",
-		"style": "dark|light "
-		},
+        "modules" : {
+            "OAuth" : {}
+        },
+        // 顶部状态栏
+        "statusbar" : {
+            "background" : "#8745FF", // 安全区域外的背景颜色，默认值为"#FFFFFF"
+            "immersed" : "none|suggestedDevice|supportedDevice，沉浸式状态栏情况",
+            "style" : "dark|light "
+        },
         /* 应用发布信息 */
         "distribute" : {
             /* android打包配置 */
@@ -56,7 +58,15 @@
             /* ios打包配置 */
             "ios" : {},
             /* SDK配置 */
-            "sdkConfigs" : {}
+            "sdkConfigs" : {
+                "oauth" : {
+                    "weixin" : {
+                        "appid" : "wxd3bc4833944996f0",
+                        "appsecret" : "eb4a91bd263ae6b74ed37d8c26838f30",
+                        "UniversalLinks" : ""
+                    }
+                }
+            }
         }
     },
     /* 快应用特有相关 */
@@ -78,7 +88,7 @@
     "mp-toutiao" : {
         "usingComponents" : true
     },
-    "uniStatistics": {  
-        "enable": false
+    "uniStatistics" : {
+        "enable" : false
     }
 }

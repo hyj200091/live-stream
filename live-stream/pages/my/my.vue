@@ -70,7 +70,7 @@
 			})
 		},
 		onShow() {
-			this.$store.dispatch('getUserInfo');
+			// this.$store.dispatch('getUserInfo');
 		},
 		methods:{
 			live(){

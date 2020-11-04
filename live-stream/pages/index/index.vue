@@ -19,7 +19,7 @@
 		<!-- 列表 -->
 		<view class="flex flex-wrap">
 			<view v-for="(item,index) in list" :key="index">
-			<l-list :item="item" :index="index" @click="openLive"></l-list>
+			<l-list :item="item" :index="index" @click="openLive(item.id)"></l-list>
 		     </view>
 		</view>
 		<view class="f-divider">
@@ -84,9 +84,9 @@ import lList from '../../components/common/l-list.vue'
 				});
 				console.log(this.list);
 			},
-			openLive() {
+			openLive(item) {
 				uni.navigateTo({
-					url: '/pages/live/live'
+					url: '/pages/live/live?id='+ item
 				})
 			}
 		}

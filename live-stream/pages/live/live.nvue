@@ -10,11 +10,11 @@
 				   <view style="width:325rpx;background-color: rgba(0,0,0,0.4);" class="flex rounded-circle">
 					   
 					   <view class="p">
-						   <image src="../../static/beijing2.jpg" style="width: 70rpx; height: 70rpx;" class="rounded-circle"></image>
+						   <image :src="detail.user.avatar || '../../static/beijing2.jpg'" style="width: 70rpx; height: 70rpx;" class="rounded-circle"></image>
 					   </view>
 					   <view class="flex-1 flex flex-column justify-center">
-						   <text class="text-white font">主播昵称</text>
-						   <text class="text-white font-sm">100</text>
+						   <text class="text-white font">{{ detail.user.username}}</text>
+						   <text class="text-white font-sm">{{ detail.user.look_count }}</text>
 					   </view>
 					   <view class="ml-3">
 						   <view class="rounded-circle flex align-center justify-center bg-danger" style="width: 70rpx;height:70rpx;">
@@ -45,7 +45,7 @@
 						  <text class="text-warning">金币</text>
 					  </view>
 					  <view class="flex-1 flex flex-column justify-center">
-						  <text class="text-white font">100</text>
+						  <text class="text-white font">{{ detail.coin }}</text>
 					  </view>
 				  </view>
 			   </view>
@@ -152,17 +152,44 @@
 		},
 		data() {
 			return {
+				id: 0,
+				detail: {
+					created_time: '',
+					id: 1,
+					title: '',
+					cover: '',
+					user_id: '',
+					look_count: '',
+					coin: '',
+					key: '',
+					status: 0,
+					userId: 0,
+					user: {
+						id: 0,
+						username: '',
+						avatar: ''
+					}
+				},
+				sign: '',
 				statusBarHeight: 0,
 				content:'',
 				gifts: [],
-				giftActiveId:0
+				giftActiveId: 0
 			};
 		},
-		onLoad() {
+		onLoad(Option) {
+			this.id = Option.id
+			console.log(this.id);
 			let res = uni.getSystemInfoSync()
 			this.statusBarHeight = res.statusBarHeight
 			// 把礼物js中的数据赋值给礼物数组
 			this.gifts = myGifts
+			// 请求后端接口，获取该直播间详情数据，包括主播信息，和直播间的签名等数据
+			$H.get('/live/read/' + this.id).then(res => {
+				console.log(res);
+				this.detail = res.data
+				this.sign = res.sign;
+			});
 		},
 		methods:{
 			// 打开送礼物框
