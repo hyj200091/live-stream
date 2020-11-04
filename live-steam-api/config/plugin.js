@@ -27,4 +27,9 @@ module.exports = {
     enable: true,
     package: 'egg-jwt',
   },
+  // socket.io安装和通讯
+  io: {
+    enable: true,
+    package: 'egg-socket.io',
+  },
 };
