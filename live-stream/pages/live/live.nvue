@@ -24,15 +24,17 @@
 				   </view>
 				   
 				   <view style="width: 325rpx;background-color: rgba(0,0,0,0.4);" class="flex rounded-circle">
+					   <!-- 实时在线观看用户情况 -->
 					   <scroll-view scroll-x="true" class="flex-1 flex">
-						   <view class="p" v-for="i in 10" :key="i">
-							   <image class="rounded-circle" src="https://soft1851.oss-cn-beijing.aliyuncs.com/markdown/2033810.jpg" style="width: 70rpx;height: 70rpx;"></image>
+						   <view class="p" v-for="(item, index) in list" :key="index">
+							   <image class="rounded-circle" :src="item.avatar || '/static/tabbar/min.png'" style="width: 70rpx;height: 70rpx;"></image>
 						   </view>
 					   </scroll-view>
 					   <view class="p">
-					   	<view class="rounded-circle flex align-center justify-center bg-danger" style="width: 70rpx;height: 70rpx;">
+					   	<view class="rounded-circle flex align-center justify-center bg-main" style="width: 70rpx;height: 70rpx;">
 							<!-- align-center justify-center 调节这两个属性使之text在view中水平垂直都居中 达到在中间的效果 -->
-							<text class="text-white font-sm">1000</text>
+							<!-- 实时在线观看人数 -->
+							<text class="text-white font-sm">{{ list.length }}</text>
 						</view>
 					   </view>
 				   </view>
@@ -177,7 +179,9 @@
 				statusBarHeight: 0,
 				content:'',
 				gifts: [],
-				giftActiveId: 0
+				giftActiveId: 0,
+				//在线用户列表
+				list: []
 			};
 		},
 		mounted() {
@@ -199,6 +203,9 @@
 				// console.log(this.detail);
 				this.sign = res.sign;
 			});
+			console.log(this.list.length)
+			// 监听全局事件
+			uni.$on('live', this.handleLiveEvent);
 		},
 		computed:{
 			src() {
@@ -213,9 +220,21 @@
 			})
 		},
 		methods:{
+			// 处理直播间事件
+			handleLiveEvent(e){
+				let d = e.data;
+				switch (e.type) {
+					case 'online':
+					if(d.action === 'join') {
+						this.list = d.data;
+					}
+					break;
+				default:
+					break;
+				}
+			},
 			// 加入或离开直播间
 			joinOrLeaveLive(type) {
-				console.log(1111111);
 				if(this.socket && this.token) {
 					this.socket.emit(type + 'Live', {
 						live_id: this.id,
