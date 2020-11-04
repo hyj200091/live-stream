@@ -7,7 +7,10 @@ module.exports = app => {
   const { router, controller, io } = app;
   // sorket路由配置测试
   // io.of('/').route('test', io.controller.nsp.test);
+  // 进入直播间
   io.of('/').route('joinLive', io.controller.live.joinLive);
+  // 离开直播间
+  io.of('/').route('leaveLive', io.controller.live.leaveLive);
   router.get('/', controller.home.index);
   // 用户注册
   router.post('/api/reg', controller.api.user.reg);
