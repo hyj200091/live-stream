@@ -133,8 +133,10 @@
 	import fGift from '@/components/live/f-gift.vue';
 	import fDanmu from '@/components/live/f-danmu.vue';
 	import uniPopup from '@/components/uni-ui/uni-popup/uni-popup.vue';
-	import myGifts from '@/common/gifts.js'
-	import $H from '@/common/request.js'
+	import myGifts from '@/common/gifts.js';
+	import $H from '@/common/request.js';
+	import $C from '@/common/config.js';
+	import { mapState } from 'vuex';
 	export default {
 		components:{
 			fGift,fDanmu,uniPopup
@@ -178,6 +180,10 @@
 				giftActiveId: 0
 			};
 		},
+		mounted() {
+			// 加入直播间
+			this.joinOrLeaveLive('join')
+		},
 		onLoad(option) {
 			this.id = option.id
 			console.log(this.id);
@@ -200,9 +206,23 @@
 					return '';
 				}
 				return `https://mylive.utools.club/live/${this.detail.key}.flv?sign=${this.sign}`;
-			}
+			},
+			...mapState({
+				socket: state => state.socket,
+				token: state => state.token
+			})
 		},
 		methods:{
+			// 加入或离开直播间
+			joinOrLeaveLive(type) {
+				console.log(1111111);
+				if(this.socket && this.token) {
+					this.socket.emit(type + 'Live', {
+						live_id: this.id,
+						token: this.token
+					});
+				}
+			},
 			// 打开送礼物框
 			openGift() {
 				this.$refs.giftPopup.open()
