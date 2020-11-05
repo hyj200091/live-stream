@@ -13,6 +13,10 @@ module.exports = app => {
   io.of('/').route('leaveLive', io.controller.live.leaveLive);
   // 发送弹幕
   io.of('/').route('comment', io.controller.live.comment);
+  // 发送礼物
+  io.of('/').route('gift', io.controller.live.gift);
+  router.get('/api/gift/list', controller.api.gift.list);
+  // 项目创建的测试接口路径
   router.get('/', controller.home.index);
   // 用户注册
   router.post('/api/reg', controller.api.user.reg);

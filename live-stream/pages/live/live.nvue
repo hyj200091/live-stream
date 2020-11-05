@@ -197,7 +197,7 @@
 		},
 		onLoad(option) {
 			this.id = option.id
-			console.log(this.id);
+			// console.log(this.id);
 			let res = uni.getSystemInfoSync()
 			this.statusBarHeight = res.statusBarHeight
 			// 把礼物js中的数据赋值给礼物数组
@@ -210,7 +210,16 @@
 				// console.log(this.detail);
 				this.sign = res.sign;
 			});
-			console.log(this.list.length)
+			
+			// 请求礼物列表接口
+			$H.get('/gift/list').then(res => {
+				// console.log('打印看礼物数据');
+				// console.log(res);
+				this.gifts = res.map(item => {
+					item.image = $C.imgUrl + item.image
+					return item
+				})
+			})
 			// 监听全局事件
 			uni.$on('live', this.handleLiveEvent);
 		},
@@ -229,6 +238,7 @@
 		methods:{
 			// 处理直播间事件
 			handleLiveEvent(e){
+				console.log(123123);
 				console.log(e);
 				let d = e.data;
 				switch (e.type) {
@@ -248,6 +258,14 @@
 					})
 					this.content = ''
 					this.$refs.input.close()
+					break;
+					case 'gift':
+					this.$refs.gift.send({
+						username: d.username,
+						gift_name: d.gift_name,
+						gift_image: d.gift_image,
+						num: d.num
+					})
 					break;
 				default:
 					break;
@@ -282,14 +300,27 @@
 				if (index === -1) {
 					return
 				}
+				
 				let g = this.gifts[index]
-				this.$refs.gift.send({
-					username: this.$store.state.user.username,
-					avatar: this.$store.state.user.avatar,
-					gift_name: g.name,
-					gift_image: g.image,
-					num: 10
-				})
+				
+				if(!this.token && !this.socket) {
+					uni.navigateTo({
+						url:'../login/login'
+					});
+					return uni.showToast({
+						title: '请先登录',
+						icon: 'none'
+					});
+				}
+				// console.log(g);
+				
+				if(this.socket) {
+					this.socket.emit('gift', {
+						live_id: this.id,
+						gift_id: g.id,
+						token: this.token
+					});
+				}
 				this.closeGift()
 			},
 			// 跳转到充值页面

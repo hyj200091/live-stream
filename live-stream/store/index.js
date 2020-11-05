@@ -19,7 +19,6 @@ export default new Vuex.Store({
 		   state,
 		   dispatch
 		  }){
-			console.log(12121212)
 		   const S =io($C.sorketUrl,{
 		    query:{},
 		    transports:['websocket'],
@@ -36,6 +35,13 @@ export default new Vuex.Store({
 		   let commendEvent = (e) => {
 			   uni.$emit('live', {
 				   type: 'comment',
+				   data: e
+			   })
+		   }
+		   // 全局事件，用来监听发送礼物
+		   let giftEvent = (e) => {
+			   uni.$emit('live', {
+				   type: 'gift',
 				   data: e
 			   })
 		   }
@@ -62,6 +68,8 @@ export default new Vuex.Store({
 			  S.on('online', onlineEvent)
 			  // 监听弹幕信息
 			  S.on('comment', commendEvent)
+			  // 监听礼物接收
+			  S.on('gift', giftEvent)
 			  // 监听来自服务器端的消息
 			  S.on(S.id, (e) => {
 				  console.log(e)
@@ -72,6 +80,7 @@ export default new Vuex.Store({
 				  if(S) {
 					  S.removeListener('online', onlineEvent)
 					  S.removeListener('comment', commendEvent)
+					  S.removeListener('gift', giftEvent)
 				  }
 			  }
 		     //监听失败

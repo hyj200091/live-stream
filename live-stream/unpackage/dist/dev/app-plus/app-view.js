@@ -1546,14 +1546,6 @@ var render = function() {
                     return _vm.$handleViewEvent($event)
                   }
                 }
-              }),
-              _c("f-list-item", {
-                attrs: { _i: 31 },
-                on: {
-                  click: function($event) {
-                    return _vm.$handleViewEvent($event)
-                  }
-                }
               })
             ],
             1
