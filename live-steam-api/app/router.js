@@ -11,6 +11,8 @@ module.exports = app => {
   io.of('/').route('joinLive', io.controller.live.joinLive);
   // 离开直播间
   io.of('/').route('leaveLive', io.controller.live.leaveLive);
+  // 发送弹幕
+  io.of('/').route('comment', io.controller.live.comment);
   router.get('/', controller.home.index);
   // 用户注册
   router.post('/api/reg', controller.api.user.reg);

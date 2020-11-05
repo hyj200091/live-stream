@@ -32,6 +32,13 @@ export default new Vuex.Store({
 				   data: e
 			   })
 		   }
+		   // 全局事件，用来监听发送弹幕
+		   let commendEvent = (e) => {
+			   uni.$emit('live', {
+				   type: 'comment',
+				   data: e
+			   })
+		   }
 		   //监听连接
 		     S.on('connect',()=>{
 		      console.log('socket已连接')
@@ -53,6 +60,8 @@ export default new Vuex.Store({
 			  })
 			  // 监听在线用户信息
 			  S.on('online', onlineEvent)
+			  // 监听弹幕信息
+			  S.on('comment', commendEvent)
 			  // 监听来自服务器端的消息
 			  S.on(S.id, (e) => {
 				  console.log(e)
@@ -62,6 +71,7 @@ export default new Vuex.Store({
 			  const removeListener = () => {
 				  if(S) {
 					  S.removeListener('online', onlineEvent)
+					  S.removeListener('comment', commendEvent)
 				  }
 			  }
 		     //监听失败
