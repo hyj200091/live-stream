@@ -42,4 +42,7 @@ module.exports = app => {
   router.get('/api/live/read/:id', controller.api.live.read);
   // 模板引擎测试
   router.get('/test', controller.admin.test.page);
+  // 新增管理员
+  router.get('/admin/manager/create', controller.admin.manager.create);
+  router.post('/admin/manager', controller.admin.manager.save);
 };
