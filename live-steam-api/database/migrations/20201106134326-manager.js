@@ -25,6 +25,7 @@ module.exports = {
       },
       created_time: DATE,
       updated_time: DATE,
+
     });
   },
 
