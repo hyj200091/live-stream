@@ -126,6 +126,12 @@ module.exports = appInfo => {
       db: 0,
     },
   };
+  // 模板引擎
+  config.view = {
+    mapping: {
+      '.html': 'nunjucks',
+    },
+  };
   const nms = new NodeMediaServer(config.mediaServer);
   nms.run();
   return {

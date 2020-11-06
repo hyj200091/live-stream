@@ -32,4 +32,9 @@ module.exports = {
     enable: true,
     package: 'egg-socket.io',
   },
+  // 模板引擎
+  nunjucks: {
+    enable: true,
+    package: 'egg-view-nunjucks',
+  },
 };

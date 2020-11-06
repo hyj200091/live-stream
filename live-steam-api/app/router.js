@@ -40,4 +40,6 @@ module.exports = app => {
   router.get('/api/live/list/:page', controller.api.live.list);
   // 查看指定直播
   router.get('/api/live/read/:id', controller.api.live.read);
+  // 模板引擎测试
+  router.get('/test', controller.admin.test.page);
 };
