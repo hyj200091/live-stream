@@ -17,12 +17,20 @@ module.exports = appInfo => {
   config.keys = appInfo.name + '_1604209593258_4433';
 
   // add your middleware config here
-  config.middleware = [ 'errorHandler', 'auth' ];
+  config.middleware = [ 'errorHandler', 'auth', 'adminAuth', 'adminSidebar' ];
 
+  config.webUrl = 'http://127.0.0.1:7001';
+  // 配置那些路由是需要验证token
   config.auth = {
-    match: [ '/api/live/create', '/api/logout', '/api/user/info', '/api/live/changstatus' ],
+    match: [ '/api/live/create', '/api/logout', '/api/user/info', '/api/live/changstatus', '/api/gift/wxpay' ],
   };
 
+  config.adminAuth = {
+    ignore: [ '/api', '/admin/login', '/admin/loginevent' ],
+  };
+  config.adminSidebar = {
+    ignore: [ '/api', '/admin/login', '/admin/loginevent', '/public' ],
+  };
   // add your user config here
   const userConfig = {
     // myAppName: 'egg',
@@ -132,6 +140,32 @@ module.exports = appInfo => {
       '.html': 'nunjucks',
     },
   };
+  // session配置
+  config.session = {
+    renew: true,
+    key: 'EGG_SESS',
+    maxAge: 24 * 3600 * 1000 * 30, // 1 天
+    httpOnly: true,
+    encrypt: true,
+  };
+  // 文件上传配置
+  config.multipart = {
+    fileSize: '50mb',
+    mode: 'stream',
+    fileExtensions: [
+      '.xls',
+      '.txt',
+      '.jpg',
+      '.JPG',
+      '.png',
+      '.PNG',
+      '.gif',
+      '.GIF',
+      '.jpeg',
+      '.JPEG',
+    ], // 上传的文件格式
+  };
+
   const nms = new NodeMediaServer(config.mediaServer);
   nms.run();
   return {
