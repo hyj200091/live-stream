@@ -60,4 +60,10 @@ module.exports = app => {
   router.post('/admin/manager', controller.admin.manager.save);
   // 管理员列表
   router.get('/admin/manager', controller.admin.manager.index);
+  // 编辑管理员路由
+  router.get('/admin/manager/edit/:id', controller.admin.manager.edit);
+  // 删除管理员路由
+  router.get('/admin/manager/delete/:id', controller.admin.manager.delete);
+  // 更新接口(编辑和删除公用)
+  router.post('/admin/manager/:id', controller.admin.manager.update);
 };
