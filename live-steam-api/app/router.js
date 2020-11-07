@@ -58,4 +58,6 @@ module.exports = app => {
   router.get('/admin/manager/create', controller.admin.manager.create);
   // 新增管理员接口
   router.post('/admin/manager', controller.admin.manager.save);
+  // 管理员列表
+  router.get('/admin/manager', controller.admin.manager.index);
 };
