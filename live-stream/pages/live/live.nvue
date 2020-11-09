@@ -224,11 +224,16 @@
 			uni.$on('live', this.handleLiveEvent);
 		},
 		computed:{
+			...mapState({
+				socket: state => state.socket,
+				token: state => state.token
+			}),
 			src() {
 				if(this.detail.key == '' || this.sign == ''){
 					return '';
 				}
-				return `https://mylive.utools.club/live/${this.detail.key}.flv?sign=${this.sign}`;
+				// return `https://mylive.utools.club/live/${this.detail.key}.flv?sign=${this.sign}`;
+			return `${$C.livePlayBaseUrl}/live/${this.detail.key}.flv?sign=${this.sign}`
 			},
 			...mapState({
 				socket: state => state.socket,
@@ -238,8 +243,6 @@
 		methods:{
 			// 处理直播间事件
 			handleLiveEvent(e){
-				console.log(123123);
-				console.log(e);
 				let d = e.data;
 				switch (e.type) {
 					case 'online':
@@ -262,6 +265,7 @@
 					case 'gift':
 					this.$refs.gift.send({
 						username: d.username,
+						avatar: d.avatar,
 						gift_name: d.gift_name,
 						gift_image: d.gift_image,
 						num: d.num

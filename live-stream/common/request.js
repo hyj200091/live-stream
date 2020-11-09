@@ -1,13 +1,10 @@
+import $C from './config.js'
 export default {
 	// 全局配置
 	common: {
-		// #ifndef H5
 		// https://houyuejia.utools.club 7001
-		baseUrl: "https://houyuejia11.utools.club/api",
-		// #endif
-		// #ifdef H5
-		baseUrl: "/api",
-		// #endif
+		// baseUrl: "https://houyuejia11.utools.club/api",
+		baseUrl: $C.baseUrl + "/api",
 		header: {
 			'Content-Type': 'application/json;charset=UTF-8',
 		},

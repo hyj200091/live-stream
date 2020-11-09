@@ -40,7 +40,8 @@ module.exports = app => {
   router.get('/api/live/list/:page', controller.api.live.list);
   // 查看指定直播
   router.get('/api/live/read/:id', controller.api.live.read);
-
+  // 上传图片
+  router.post('/api/upload', controller.api.common.upload);
 
   // 后台相关路由配置
 

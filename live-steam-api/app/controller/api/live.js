@@ -76,7 +76,7 @@ class LiveController extends Controller {
     });
     const { id, type } = ctx.request.body;
     const live = await app.model.Live.findOne({
-      whrer: {
+      where: {
         id,
         user_id,
       },
